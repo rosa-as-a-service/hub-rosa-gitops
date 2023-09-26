@@ -1,0 +1,45 @@
+---
+apiVersion: operator.openshift.io/v1alpha1
+kind: CertManager
+metadata:
+  name: cluster
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  controllerConfig:
+    overrideArgs:
+      - '--dns01-recursive-nameservers=8.8.8.8:53,1.1.1.1:53'
+      - '--dns01-recursive-nameservers-only'
+  logLevel: Normal
+  managementState: Managed
+  observedConfig: null
+  operatorLogLevel: Normal
+  unsupportedConfigOverrides: null
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-sandbox
+  namespace: cert-manager-operator
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  acme:
+    email: ahussey@redhat.com
+    server: https://acme-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: route53-issuer-account-key
+    solvers:
+    - selector:
+        dnsZones:
+          - "k8s.sandbox1760.opentlc.com"
+      dns01:
+        route53:
+          region: ap-southeast-2
+          hostedZoneID: Z2SYL2RA5IM05K
+          accessKeyIDSecretRef:
+            name: route53-credentials-secret
+            key: access-key-id
+          secretAccessKeySecretRef:
+            name: route53-credentials-secret
+            key: secret-access-key

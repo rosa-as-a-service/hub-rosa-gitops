@@ -1,0 +1,124 @@
+---
+- name: Install and configure ArgoCD
+  hosts: localhost
+  connection: local
+  become: false
+  gather_facts: false
+  tasks:
+    # Deploy ArgoCD
+    - name: configure argocd namespace
+      kubernetes.core.k8s:
+        src: "argocd/namespace.yml"
+      failed_when: false
+
+    - name: configure argocd operatorgroup
+      kubernetes.core.k8s:
+        src: "argocd/operatorgroup.yml"
+
+    - name: configure argocd subscription
+      kubernetes.core.k8s:
+        src: "argocd/subscription.yml"
+      register: deploy_argocd
+      until: "deploy_argocd.result.status.state == 'AtLatestKnown'"
+      retries: 10
+      delay: 10
+
+    - name: configure argocd cluster role binding
+      kubernetes.core.k8s:
+        src: "argocd/clusterrolebinding.yml"
+
+    - name: configure argocd repo
+      kubernetes.core.k8s:
+        template: "argocd/repo.yml"
+
+    - name: configure argocd initial application
+      kubernetes.core.k8s:
+        template: "argocd/application.yml"
+
+    # This namespace is later managed by GitOps, but is required for the initial bootstrapping to complete
+    - name: configure ROSAaaS project
+      kubernetes.core.k8s:
+        resource_definition:
+          kind: Project
+          apiVersion: project.openshift.io/v1
+          metadata:
+            name: rosa-as-a-service
+            labels:
+              kubernetes.io/metadata.name: rosa-as-a-service
+      failed_when: false
+
+    - name: configure SSH secret
+      kubernetes.core.k8s:
+        resource_definition:
+          kind: Secret
+          apiVersion: v1
+          metadata:
+            name: argocd-github-ssh
+            namespace: rosa-as-a-service
+            annotations:
+              tekton.dev/git-0: github.com
+          type: Opaque
+          data:
+            id_rsa: "{{ ssh_private_key | b64encode}}"
+
+    - name: link SSH secret to pipelines service account
+      kubernetes.core.k8s:
+        resource_definition:
+          kind: ServiceAccount
+          apiVersion: v1
+          metadata:
+            name: pipeline
+            namespace: rosa-as-a-service
+          secrets:
+            - name: argocd-github-ssh
+
+    - name: configure webhook secret
+      kubernetes.core.k8s:
+        resource_definition:
+          kind: Secret
+          apiVersion: v1
+          metadata:
+            name: webhook-secret
+            namespace: rosa-as-a-service
+          type: Opaque
+          data:
+            secretToken: "{{ webhook_secret | b64encode }}"
+
+    - name: configure ROSA SSO secret
+      kubernetes.core.k8s:
+        resource_definition:
+          kind: Secret
+          apiVersion: v1
+          metadata:
+            name: oidc
+            namespace: rosa-as-a-service
+          data:
+            key: "{{ sso_oidc_key | b64encode }}"
+            secret: "{{ sso_oidc_secret | b64encode }}"
+            endpoint: "{{ sso_oidc_endpoint | b64encode }}"
+            verify-ssl: "{{ sso_oidc_verify_ssl | b64encode }}"
+
+    # This namespace is later managed by GitOps, but is required for the initial bootstrapping to complete
+    - name: configure cert-manager project
+      kubernetes.core.k8s:
+        resource_definition:
+          kind: Project
+          apiVersion: project.openshift.io/v1
+          metadata:
+            name: cert-manager
+            labels:
+              kubernetes.io/metadata.name: cert-manager
+      failed_when: false
+
+    - name: configure cert-manager route53 secret
+      kubernetes.core.k8s:
+        resource_definition:
+          kind: Secret
+          apiVersion: v1
+          metadata:
+            name: route53-credentials-secret
+            namespace: cert-manager
+          data:
+            access-key-id: "{{ access_key_id | b64encode}}"
+            secret-access-key: "{{ secret_access_key | b64encode }}"
+          type: Opaque
