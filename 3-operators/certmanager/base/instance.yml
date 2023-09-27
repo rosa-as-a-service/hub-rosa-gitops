@@ -5,6 +5,7 @@ metadata:
   name: cluster
   annotations:
     argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   controllerConfig:
     overrideArgs:
@@ -23,6 +24,7 @@ metadata:
   namespace: cert-manager-operator
   annotations:
     argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   acme:
     email: ahussey@redhat.com
