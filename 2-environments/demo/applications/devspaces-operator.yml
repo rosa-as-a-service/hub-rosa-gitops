@@ -14,7 +14,7 @@ spec:
   source:
     path: 3-operators/devspaces/overlays/latest
     repoURL: >-
-      https://github.com/rosa-as-a-service/hub-rosa-gitops.git
+      git@github.com:rosa-as-a-service/hub-rosa-gitops.git
     targetRevision: main
   syncPolicy:
     automated:
