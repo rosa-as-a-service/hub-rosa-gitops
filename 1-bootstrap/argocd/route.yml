@@ -1,0 +1,26 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  annotations:
+    openshift.io/host.generated: 'true'
+    cert-manager.io/issuer-kind: ClusterIssuer
+    cert-manager.io/issuer-name: letsencrypt-sandbox
+  name: openshift-gitops-server
+  namespace: openshift-gitops
+  labels:
+    app.kubernetes.io/managed-by: openshift-gitops
+    app.kubernetes.io/name: openshift-gitops-server
+    app.kubernetes.io/part-of: argocd
+spec:
+  host: >-
+    openshift-gitops-server-openshift-gitops.apps.rosa-ltlw2.7utd.p1.openshiftapps.com
+  to:
+    kind: Service
+    name: openshift-gitops-server
+    weight: 100
+  port:
+    targetPort: https
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

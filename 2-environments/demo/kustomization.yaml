@@ -8,4 +8,5 @@ resources:
   - applications/devspaces-operator.yml
   - applications/pipelines-operator.yml
   - applications/rhsso-operator.yml
+  - applications/acs-operator.yml
   - applications/misc.yml

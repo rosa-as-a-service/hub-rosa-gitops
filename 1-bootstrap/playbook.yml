@@ -31,6 +31,10 @@
       kubernetes.core.k8s:
         template: "argocd/repo.yml"
 
+    - name: configure argocd route
+      kubernetes.core.k8s:
+        template: "argocd/route.yml"
+
     - name: configure argocd initial application
       kubernetes.core.k8s:
         template: "argocd/application.yml"
