@@ -9,4 +9,5 @@ resources:
   - applications/pipelines-operator.yml
   - applications/rhsso-operator.yml
   - applications/acs-operator.yml
+  - applications/acm-operator.yml
   - applications/misc.yml
