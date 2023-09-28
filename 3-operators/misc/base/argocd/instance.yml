@@ -36,6 +36,8 @@ spec:
         memory: 128Mi
     route:
       enabled: false
+      tls:
+        termination: reencrypt
   prometheus:
     enabled: false
     ingress:
