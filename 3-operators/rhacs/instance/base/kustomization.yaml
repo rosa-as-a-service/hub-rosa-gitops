@@ -6,4 +6,4 @@ commonAnnotations:
 resources:
   - namespace.yaml
   - central.yaml
-  - route.yaml
+#  - route.yaml
