@@ -7,3 +7,4 @@ resources:
   - subscription.yaml
   - namespace.yaml
   - instance.yaml
+  - route.yaml
