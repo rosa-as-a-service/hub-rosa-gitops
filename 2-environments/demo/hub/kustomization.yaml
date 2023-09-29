@@ -5,9 +5,9 @@ metadata:
 resources:
   - applications/aap-operator.yml
   - applications/cert-manager-operator.yml
-  - applications/devspaces-operator.yml
-  - applications/pipelines-operator.yml
-  - applications/rhsso-operator.yml
+#  - applications/devspaces-operator.yml
+#  - applications/pipelines-operator.yml
+#  - applications/rhsso-operator.yml
   - applications/acs-operator.yml
   - applications/acm-operator.yml
   - applications/misc.yml
