@@ -4,6 +4,7 @@ kind: AutomationController
 metadata:
   name: automation-controller
   annotations:
+  annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
   postgres_keepalives_count: 5

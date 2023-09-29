@@ -3,6 +3,7 @@ kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
   annotations:
+    argocd.argoproj.io/sync-wave: "4"
     cert-manager.io/issuer-kind: ClusterIssuer
     cert-manager.io/issuer-name: letsencrypt-sandbox
   name: eda
