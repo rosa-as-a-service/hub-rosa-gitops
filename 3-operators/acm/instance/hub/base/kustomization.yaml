@@ -4,5 +4,4 @@ namespace: open-cluster-management
 commonAnnotations:
   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 resources:
-  - namespace.yaml
   - multiclusterhub.yaml
