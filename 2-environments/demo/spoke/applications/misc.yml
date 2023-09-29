@@ -2,15 +2,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: operators
+  name: misc-configurations
   namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   destination:
-    namespace: openshift-operators
+    namespace: aap-infra
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: 2-environments/demo/hub
+    path: 3-operators/misc/overlays/test
     repoURL: >-
       git@github.com:rosa-as-a-service/hub-rosa-gitops.git
     targetRevision: main

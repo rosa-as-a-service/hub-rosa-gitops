@@ -2,15 +2,17 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: operators
+  name: acm
   namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   destination:
-    namespace: openshift-operators
+    namespace: open-cluster-management
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: 2-environments/demo/hub
+    path: 3-operators/acm/overlays/release-2.8
     repoURL: >-
       git@github.com:rosa-as-a-service/hub-rosa-gitops.git
     targetRevision: main
