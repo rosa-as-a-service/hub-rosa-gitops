@@ -7,3 +7,14 @@ metadata:
     cert-manager.io/issuer-kind: ClusterIssuer
     cert-manager.io/issuer-name: letsencrypt-sandbox
   name: automation-controller
+spec:
+  to:
+    kind: Service
+    name: automation-controller-service
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

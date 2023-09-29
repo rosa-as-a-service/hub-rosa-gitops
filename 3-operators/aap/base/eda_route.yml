@@ -7,3 +7,14 @@ metadata:
     cert-manager.io/issuer-kind: ClusterIssuer
     cert-manager.io/issuer-name: letsencrypt-sandbox
   name: eda
+spec:
+  to:
+    kind: Service
+    name: eda-ui
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
