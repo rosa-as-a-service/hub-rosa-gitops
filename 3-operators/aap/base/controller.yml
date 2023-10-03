@@ -6,6 +6,7 @@ metadata:
   annotations:
   annotations:
     argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   postgres_keepalives_count: 5
   postgres_keepalives_idle: 5

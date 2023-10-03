@@ -5,6 +5,7 @@ metadata:
   name: automation-hub
   annotations:
     argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
   nginx_proxy_send_timeout: 120s
   gunicorn_content_workers: 2
