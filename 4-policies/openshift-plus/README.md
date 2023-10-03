@@ -23,10 +23,10 @@ Prior to applying the `PolicySet`, perform these steps:
     ```apiVersion: cluster.open-cluster-management.io/v1beta2
     kind: ManagedClusterSetBinding
     metadata:
-        name: default
+        name: spokes
         namespace: policies
     spec:
-        clusterSet: default
+        clusterSet: spokes
     ```
     ```bash
     oc apply -f managed-cluster.yaml 
