@@ -48,10 +48,11 @@ patches:
               minReplicas: 2
               replicas: 2
           scannerComponent: Enabled
-          resources:
-            limits:
-              cpu: '1'
-              memory: 2Gi
-            requests:
-              cpu: '1'
-              memory: 1000Mi
+          db:
+            resources:
+              limits:
+                cpu: '1'
+                memory: 2Gi
+              requests:
+                cpu: '1'
+                memory: 1000Mi
