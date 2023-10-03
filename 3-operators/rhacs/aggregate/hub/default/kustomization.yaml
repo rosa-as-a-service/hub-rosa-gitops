@@ -4,4 +4,4 @@ commonAnnotations:
   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 resources:
   - ../../../operator/overlays/stable
-  - ../../../instance/hub/overlays/default
+  - ../../../instance/hub/overlays/limits
