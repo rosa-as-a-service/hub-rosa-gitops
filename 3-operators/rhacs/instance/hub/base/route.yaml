@@ -8,7 +8,7 @@ metadata:
   name: central
   namespace: acs-instance
 spec:
-  host: central-acs-instance.apps.rosa-ltlw2.7utd.p1.openshiftapps.com
+  host: central-acs-instance.apps.rosa-6bt96.4z8t.p1.openshiftapps.com
   to:
     kind: Service
     name: central

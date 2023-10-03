@@ -3,4 +3,4 @@
 export CLUSTER_USERNAME="<username>"
 export CLUSTER_PASSWORD="<password>"
 
-oc login -u ${CLUSTER_USERNAME} -p ${CLUSTER_PASSWORD} https://api.rosa-ltlw2.7utd.p1.openshiftapps.com:6443
+oc login -u ${CLUSTER_USERNAME} -p ${CLUSTER_PASSWORD} https://api.rosa-6bt96.4z8t.p1.openshiftapps.com:6443
