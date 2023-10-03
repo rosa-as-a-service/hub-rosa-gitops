@@ -5,3 +5,4 @@ commonAnnotations:
   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 resources:
   - multiclusterhub.yaml
+  - spoke_application.yaml
