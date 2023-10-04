@@ -5,6 +5,4 @@ commonAnnotations:
 resources:
   - multiclusterhub.yml
   - spoke_application.yml
-  - cluster_set.yml
-  - placement.yml
   - gitops_cluster.yml
