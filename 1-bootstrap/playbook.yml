@@ -126,3 +126,27 @@
             access-key-id: "{{ access_key_id | b64encode}}"
             secret-access-key: "{{ secret_access_key | b64encode }}"
           type: Opaque
+
+    # This namespace is later managed by GitOps, but is required for the initial bootstrapping to complete
+    - name: configure githubcom-rosa-as-a-service project
+      kubernetes.core.k8s:
+        resource_definition:
+          kind: Project
+          apiVersion: project.openshift.io/v1
+          metadata:
+            name: githubcom-rosa-as-a-service-ns
+            labels:
+              kubernetes.io/metadata.name: githubcom-rosa-as-a-service-ns
+      failed_when: false
+
+    - name: configure acm - rosa-as-a-service git secret
+      kubernetes.core.k8s:
+        resource_definition:
+          kind: Secret
+          apiVersion: v1
+          metadata:
+            name: rosa-as-a-service-git-repo-creds
+            namespace: githubcom-rosa-as-a-service-ns
+          data:
+            sshKey: "{{ ssh_private_key | b64encode }}"
+          type: Opaque
