@@ -66,7 +66,18 @@ policies:
     - CA-2 Security Assessments
     - CA-7 Continuous Monitoring
   manifests:
-    - path: input-compliance/
+    - path: input-compliance/policy-compliance-operator-install.yaml
+  policySets:
+    - openshift-plus-clusters
+    - openshift-plus-hub
+- name: policy-compliance-operator-e8
+  categories:
+    - CA Security Assessment and Authorization
+  controls:
+    - CA-2 Security Assessments
+    - CA-7 Continuous Monitoring
+  manifests:
+    - path: input-compliance/policy-e8-scan.yml
   policySets:
     - openshift-plus-clusters
     - openshift-plus-hub
