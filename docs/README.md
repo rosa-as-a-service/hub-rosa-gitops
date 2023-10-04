@@ -5,6 +5,7 @@ This repository hosts all the artefacts required to configure a Hub ROSA instanc
 
 ### Prerequisites
 ```
+python3 -m pip install -r requirements.txt
 ansible-galaxy install -r 1-bootstrap/requirements.yaml
 ```
 
