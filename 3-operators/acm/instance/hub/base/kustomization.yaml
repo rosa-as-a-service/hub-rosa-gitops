@@ -4,5 +4,4 @@ commonAnnotations:
   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 resources:
   - multiclusterhub.yml
-#  - spoke_application.yml
   - gitops_cluster.yml
