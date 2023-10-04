@@ -1,15 +1,25 @@
 ---
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
   name: misc-configurations
   namespace: openshift-gitops
   annotations:
     argocd.argoproj.io/sync-wave: "3"
 spec:
+  generators:
+    - clusterDecisionResource:
+        configMapRef: acm-placement
+        labelSelector:
+          matchLabels:
+            cluster.open-cluster-management.io/placement: spoke-cluster-placement
+        requeueAfterSeconds: 180
+  template:
+    metadata:
+      name: misc-configurations-{{name}}
   destination:
     namespace: openshift-gitops
-    server: 'https://kubernetes.default.svc'
+    server: "{{server}}"
   project: default
   source:
     path: 3-operators/misc/overlays/test/spoke
