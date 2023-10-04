@@ -16,20 +16,45 @@ The Advanced Cluster Security Secured Cluster Services and the Compliance Operat
 
 Prior to applying the `PolicySet`, perform these steps:
 
-1. To allow for subscriptions to be applied below you must apply and set to enforce the policy [policy-configure-subscription-admin-hub.yaml](https://github.com/open-cluster-management-io/policy-collection/blob/main/community/CM-Configuration-Management/policy-configure-subscription-admin-hub.yaml).
-2. Install the Policy generator Kustomize plugin by following the [installation instructions](https://github.com/stolostron/policy-generator-plugin#installation). It is recommended to use Kustomize v4.5+.
-3. Policies are installed to the `policies` namespace.  Make sure the placement bindings match this namespace for the hub and other managed clusters.
+1. Create two cluster sets in ACM:
+- One cluster set should be named `spokes` and contain the spoke clusters
+- The other cluster set should be named `hub` and contain the hub 
+
+2. Ensure that the ACS Central components have deployed successfully to the `acs-instance` namespace on the hub cluster (via ArgoCD), and create the `policies` namespace on the hub:
+```
+oc new-project policies
+```
+
+3. To allow for subscriptions to be applied below you must apply and set to enforce the policy [policy-configure-subscription-admin-hub.yaml](https://github.com/open-cluster-management-io/policy-collection/blob/main/community/CM-Configuration-Management/policy-configure-subscription-admin-hub.yaml). Create this file:
+```
+oc create -f policy-configure-subscription-admin-hub.yaml
+```
+4. Install the Policy generator Kustomize plugin by following the [installation instructions](https://github.com/stolostron/policy-generator-plugin#installation). It is recommended to use Kustomize v4.5+.
+
+5. Policies are installed to the `policies` namespace.  Make sure the placement bindings match this namespace for the hub and other managed clusters.
    Example yaml to apply a ManagedClusterSetBinding for the policies namespace.
-    ```apiVersion: cluster.open-cluster-management.io/v1beta2
+    ```yaml
+    apiVersion: cluster.open-cluster-management.io/v1beta2
     kind: ManagedClusterSetBinding
     metadata:
         name: spokes
         namespace: policies
     spec:
         clusterSet: spokes
+    ---
+    apiVersion: cluster.open-cluster-management.io/v1beta2
+    kind: ManagedClusterSetBinding
+    metadata:
+        name: hub
+        namespace: policies
+    spec:
+        clusterSet: hub
     ```
     ```bash
     oc apply -f managed-cluster.yaml 
     ```
 
-Apply the policies using the kustomize command or subscribing to a fork of the repository and pointing to this directory.  See the details for using the Policy Generator for [more information](https://github.com/stolostron/policy-collection/tree/main/policygenerator).  The command to run is `kustomize build --enable-alpha-plugins  | oc apply -f -`
+6. Finally, apply the policies into the `policies` namespace:
+```
+kustomize build --enable-alpha-plugins  | oc apply -n policies -f -
+```
