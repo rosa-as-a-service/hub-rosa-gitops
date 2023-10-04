@@ -5,4 +5,4 @@ metadata:
   name: custom-logo
   namespace: openshift-config
 binaryData:
-  custom-logo.png: 
+  custom-logo.png: <change-me>
