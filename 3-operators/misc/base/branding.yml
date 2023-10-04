@@ -6,5 +6,5 @@ metadata:
 spec:
    customization:
       customLogoFile:
-         name: console-custom-logo
-         key: console-custom-logo.png
+         name: custom-logo
+         key: custom-logo.png
