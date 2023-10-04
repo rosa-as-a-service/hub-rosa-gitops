@@ -41,8 +41,11 @@ metadata:
   name: githubcom-rosa-as-a-service-hub-rosa-gitops
   namespace: githubcom-rosa-as-a-service-hub-rosa-gitops-ns
 spec:
+  insecureSkipVerify: true
+  pathname: git@github.com:rosa-as-a-service/hub-rosa-gitops.git
+  secretRef:
+    name: rosa-as-a-service-git-repo-creds
   type: Git
-  pathname: 'https://github.com/rosa-as-a-service/hub-rosa-gitops'
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
