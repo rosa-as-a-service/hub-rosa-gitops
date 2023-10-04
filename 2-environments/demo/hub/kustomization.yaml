@@ -11,3 +11,4 @@ resources:
   - applications/acs-operator.yml
   - applications/acm-operator.yml
   - applications/misc.yml
+  - applications/spoke_misc.yml

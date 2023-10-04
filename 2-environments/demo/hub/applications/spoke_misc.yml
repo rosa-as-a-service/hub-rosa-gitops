@@ -16,11 +16,11 @@ spec:
         requeueAfterSeconds: 180
   template:
     metadata:
-      name: misc-configurations-{{name}}
+      name: 'misc-configurations-{{name}}'
     spec:
       destination:
         namespace: openshift-gitops
-        server: "{{server}}"
+        server: '{{server}}'
       project: default
       source:
         path: 3-operators/misc/overlays/test/spoke

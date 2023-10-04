@@ -6,4 +6,4 @@ resources:
 #  - applications/cert-manager-operator.yml
   - applications/devspaces-operator.yml
   - applications/pipelines-operator.yml
-  - applications/misc.yml
+#  - applications/misc.yml
