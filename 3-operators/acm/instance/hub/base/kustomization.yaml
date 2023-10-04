@@ -3,5 +3,8 @@ kind: Kustomization
 commonAnnotations:
   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 resources:
-  - multiclusterhub.yaml
-  - spoke_application.yaml
+  - multiclusterhub.yml
+  - spoke_application.yml
+  - cluster_set.yml
+  - placement.yml
+  - gitops_cluster.yml
