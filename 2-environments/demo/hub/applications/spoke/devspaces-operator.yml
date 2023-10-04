@@ -20,7 +20,7 @@ spec:
     spec:
       destination:
         namespace: openshift-operators
-        server: ''{{server}}''
+        server: '{{server}}'
       project: default
       source:
         path: 3-operators/devspaces/overlays/latest
