@@ -2,15 +2,15 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: spoke-gitops-test
+  name: spoke-baseline
   annotations:
     argocd.argoproj.io/sync-wave: "4"
 ---
 apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
-  name: spoke-gitops-test
-  namespace: spoke-gitops-test
+  name: spoke-baseline
+  namespace: spoke-baseline
   annotations:
     argocd.argoproj.io/sync-wave: "4"
 spec:
@@ -23,12 +23,12 @@ spec:
       - key: app
         operator: In
         values:
-          - spoke-gitops-test
+          - spoke-baseline
 ---
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: githubcom-rosa-as-a-service-hub-rosa-gitops-ns
+  name: githubcom-rosa-as-a-service-ns
   annotations:
     argocd.argoproj.io/sync-wave: "4"
 ---
@@ -38,8 +38,8 @@ metadata:
   annotations:
     apps.open-cluster-management.io/reconcile-rate: medium
     argocd.argoproj.io/sync-wave: "4"
-  name: githubcom-rosa-as-a-service-hub-rosa-gitops
-  namespace: githubcom-rosa-as-a-service-hub-rosa-gitops-ns
+  name: githubcom-rosa-as-a-service
+  namespace: githubcom-rosa-as-a-service-ns
 spec:
   insecureSkipVerify: true
   pathname: git@github.com:rosa-as-a-service/hub-rosa-gitops.git
@@ -56,15 +56,15 @@ metadata:
     apps.open-cluster-management.io/reconcile-option: merge
     argocd.argoproj.io/sync-wave: "4"
   labels:
-    app: spoke-gitops-test
-  name: spoke-gitops-test-subscription-1
-  namespace: spoke-gitops-test
+    app: spoke-baseline
+  name: spoke-baseline-subscription
+  namespace: spoke-baseline
 spec:
-  channel: githubcom-rosa-as-a-service-hub-rosa-gitops-ns/githubcom-rosa-as-a-service-hub-rosa-gitops
+  channel: githubcom-rosa-as-a-service-ns/githubcom-rosa-as-a-service
   placement:
     placementRef:
       kind: Placement
-      name: spoke-gitops-test-placement-1
+      name: spoke-baseline-placement
 ---
 apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
@@ -72,9 +72,9 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "4"
   labels:
-    app: spoke-gitops-test
-  name: spoke-gitops-test-placement-1
-  namespace: spoke-gitops-test
+    app: spoke-baseline
+  name: spoke-baseline-placement
+  namespace: spoke-baseline
 spec:
   predicates:
     - requiredClusterSelector:
@@ -89,7 +89,7 @@ spec:
 apiVersion: cluster.open-cluster-management.io/v1beta2
 kind: ManagedClusterSetBinding
 metadata:
-  namespace: spoke-gitops-test
+  namespace: spoke-baseline
   name: global
   annotations:
     argocd.argoproj.io/sync-wave: "4"
