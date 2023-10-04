@@ -17,19 +17,20 @@ spec:
   template:
     metadata:
       name: misc-configurations-{{name}}
-  destination:
-    namespace: openshift-gitops
-    server: "{{server}}"
-  project: default
-  source:
-    path: 3-operators/misc/overlays/test/spoke
-    repoURL: >-
-      git@github.com:rosa-as-a-service/hub-rosa-gitops.git
-    targetRevision: main
-  syncPolicy:
-    automated:
-      prune: false
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
-      - ApplyOutOfSyncOnly=true
+    spec:
+      destination:
+        namespace: openshift-gitops
+        server: "{{server}}"
+      project: default
+      source:
+        path: 3-operators/misc/overlays/test/spoke
+        repoURL: >-
+          git@github.com:rosa-as-a-service/hub-rosa-gitops.git
+        targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
