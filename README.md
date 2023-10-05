@@ -28,38 +28,38 @@ The `spoke`s have a baseline configuration applied, but gives the freedom and po
 title: Top Down View
 ---
 flowchart TD;
-    hub(ROSA Hub)
-    spoke1(ROSA Spoke 1)
-    spoke2(ROSA Spoke 2)
-    spoke3(ROSA Spoke 3)
-    spoke4(ROSA Spoke 4)
-    spoke5(ROSA Spoke 5)
+    hub(ROSA)
+    spoke1(ROSA)
+    spoke2(ROSA)
+    spoke3(ROSA)
+    spoke4(ROSA)
+    spoke5(ROSA)
 
-    subgraph 0
+    subgraph HUB
     hub
     end
 
-    subgraph 1
+    subgraph Spoke 1
     spoke1
     end
     hub<-- PrivateLink -->spoke1
 
-    subgraph 2
+    subgraph Spoke 2
     spoke2
     end
     hub<-- PrivateLink -->spoke2
 
-    subgraph 3
+    subgraph Spoke 3
     spoke3
     end
     hub<-- PrivateLink -->spoke3
 
-    subgraph 4
+    subgraph Spoke 4
     spoke4
     end
     hub<-- PrivateLink -->spoke4
 
-    subgraph 5
+    subgraph Spoke 5
     spoke5
     end
     hub<-- PrivateLink -->spoke5
