@@ -6,3 +6,4 @@ resources:
   - devspaces-operator.yml
   - misc.yml
   - pipelines-operator.yml
+  - ack-s3-operator.yml

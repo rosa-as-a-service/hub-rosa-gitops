@@ -1,0 +1,36 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ack-s3
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  generators:
+    - clusterDecisionResource:
+        configMapRef: acm-placement
+        labelSelector:
+          matchLabels:
+            cluster.open-cluster-management.io/placement: spoke-cluster-placement
+        requeueAfterSeconds: 180
+  template:
+    metadata:
+      name: 'ack-s3-{{name}}'
+    spec:
+      destination:
+        namespace: ack-system
+        server: '{{server}}'
+      project: default
+      source:
+        path: 3-operators/ack-s3/overlays/alpha
+        repoURL: >-
+          git@github.com:rosa-as-a-service/hub-rosa-gitops.git
+        targetRevision: main
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true
