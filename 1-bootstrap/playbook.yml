@@ -127,26 +127,46 @@
             secret-access-key: "{{ secret_access_key | b64encode }}"
           type: Opaque
 
-    # This namespace is later managed by GitOps, but is required for the initial bootstrapping to complete
-    - name: configure githubcom-rosa-as-a-service project
+    # This namespace is later managed by Amazon Controller for Kubernetes - Amazon S3 Operator, but is required for the initial bootstrapping to complete
+    - name: configure ack-system project
       kubernetes.core.k8s:
         resource_definition:
           kind: Project
           apiVersion: project.openshift.io/v1
           metadata:
-            name: githubcom-rosa-as-a-service-ns
+            name: ack-system
             labels:
-              kubernetes.io/metadata.name: githubcom-rosa-as-a-service-ns
+              kubernetes.io/metadata.name: ack-system
       failed_when: false
 
-    - name: configure acm - rosa-as-a-service git secret
+    - name: configure ack-s3-user-secrets
       kubernetes.core.k8s:
         resource_definition:
           kind: Secret
           apiVersion: v1
           metadata:
-            name: rosa-as-a-service-git-repo-creds
-            namespace: githubcom-rosa-as-a-service-ns
+            name: ack-s3-user-secrets
+            namespace: ack-system
           data:
-            sshKey: "{{ ssh_private_key | b64encode }}"
+            AWS_ACCESS_KEY_ID: "{{ access_key_id | b64encode}}"
+            AWS_SECRET_ACCESS_KEY: "{{ secret_access_key | b64encode }}"
           type: Opaque
+
+    - name: configure ack-s3-user-config
+      kubernetes.core.k8s:
+        resource_definition:
+          kind: ConfigMap
+          apiVersion: v1
+          metadata:
+            name: ack-s3-user-config
+            namespace: ack-system
+          immutable: false
+          data:
+            ACK_ENABLE_DEVELOPMENT_LOGGING: 'false'
+            ACK_LOG_LEVEL: info
+            ACK_RESOURCE_TAGS: rosa-as-a-service
+            ACK_WATCH_NAMESPACE: ''
+            AWS_REGION: ap-southeast-2
+            ENABLE_LEADER_ELECTION: 'true'
+            LEADER_ELECTION_NAMESPACE: ''
+

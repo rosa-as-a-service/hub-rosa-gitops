@@ -1,0 +1,14 @@
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: ack-s3
+  namespace: ack-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  channel: <change-me>
+  installPlanApproval: Automatic
+  name: ack-s3-controller
+  source: community-operators
+  sourceNamespace: openshift-marketplace
