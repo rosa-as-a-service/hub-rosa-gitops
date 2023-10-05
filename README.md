@@ -24,7 +24,10 @@ The `hub` also monitors the `spoke`s health and compliance using Red Hat Advance
 The `spoke`s have a baseline configuration applied, but gives the freedom and power to the end user for any further configuration.
 
 ```mermaid
-graph LR;
+---
+title: Top Down View
+---
+graph TD;
     hub(ROSA Hub)
     spoke1(ROSA Spoke 1)
     spoke2(ROSA Spoke 2)
