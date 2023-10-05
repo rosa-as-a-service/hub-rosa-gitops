@@ -35,22 +35,30 @@ flowchart TD;
     spoke4(ROSA Spoke 4)
     spoke5(ROSA Spoke 5)
 
+    subgraph 0
+    hub
+    end
+
     subgraph 1
     spoke1
     end
     hub<-- PrivateLink -->spoke1
+
     subgraph 2
     spoke2
     end
     hub<-- PrivateLink -->spoke2
+
     subgraph 3
     spoke3
     end
     hub<-- PrivateLink -->spoke3
+
     subgraph 4
     spoke4
     end
     hub<-- PrivateLink -->spoke4
+
     subgraph 5
     spoke5
     end
