@@ -10,7 +10,7 @@ resources:
 #  - applications/rhsso-operator.yml
   - applications/acs-operator.yml
   - applications/acm-operator.yml
-  - applications/ack-s3-operator.yml
+#  - applications/ack-s3-operator.yml
   - applications/misc.yml
   - applications/quay-operator.yml
   - applications/spoke
