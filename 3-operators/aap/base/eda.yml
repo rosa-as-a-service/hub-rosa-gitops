@@ -24,4 +24,4 @@ spec:
   loadbalancer_protocol: http
   worker:
     replicas: 2
-  automation_server_url: https://automation-controller.apps.rosa-6bt96.4z8t.p1.openshiftapps.com
+  automation_server_url: https://automation-controller.apps.rosa-pbz7x.7utd.p1.openshiftapps.com

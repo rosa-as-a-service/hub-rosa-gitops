@@ -34,7 +34,7 @@ spec:
     solvers:
     - selector:
         dnsZones:
-          - "rosa-6bt96.4z8t.p1.openshiftapps.com"
+          - "rosa-pbz7x.7utd.p1.openshiftapps.com"
       dns01:
         route53:
           region: ap-southeast-2
