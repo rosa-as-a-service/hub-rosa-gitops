@@ -8,10 +8,26 @@ metadata:
     argocd.argoproj.io/sync-wave: "4"
 spec: {}
 ---
+apiVersion: objectbucket.io/v1alpha1
+kind: ObjectBucketClaim
+metadata:
+  name: thanos-storage
+  namespace: open-cluster-management
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+spec:
+  additionalConfig:
+    bucketclass: noobaa-default-bucket-class
+  bucketName: thanos-storage
+  storageClassName: openshift-storage.noobaa.io
+---
 kind: MultiClusterObservability
 apiVersion: observability.open-cluster-management.io/v1beta2
 metadata:
   name: observability
+  namespace: open-cluster-management
+  annotations:
+    argocd.argoproj.io/sync-wave: "5"
 spec:
   observabilityAddonSpec: {}
   storageConfig:
