@@ -6,4 +6,6 @@ metadata:
     argocd.argoproj.io/sync-wave: "1"
   name: operator-group
   namespace: openshift-logging
-spec: {}
+spec:
+  targetNamespaces:
+    - openshift-logging
