@@ -3,7 +3,7 @@ kind: ManagedClusterSetBinding
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: '2'
+    argocd.argoproj.io/sync-wave: '5'
   name: global
   namespace: openshift-gitops
 spec:
@@ -14,7 +14,7 @@ kind: Placement
 metadata:
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: '3'
+    argocd.argoproj.io/sync-wave: '6'
   name: spoke-cluster-placement
   namespace: openshift-gitops
 spec:
@@ -36,7 +36,7 @@ metadata:
   namespace: openshift-gitops
   annotations:
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
-    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-wave: "7"
 spec:
   argoServer:
     cluster: local-cluster
