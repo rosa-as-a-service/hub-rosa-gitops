@@ -1,0 +1,24 @@
+---
+apiVersion: logging.openshift.io/v1
+kind: ClusterLogForwarder
+metadata:
+  name: instance
+  namespace: openshift-logging
+spec:
+  outputs:
+    - cloudwatch:
+        groupBy: namespaceName
+        groupPrefix: rosa-pbz7x # template this for spokes
+        region: ap-southeast-2
+      name: cloudwatch
+      secret:
+        name: aws-credentials
+      type: cloudwatch
+  pipelines:
+    - inputRefs:
+        - application
+        - audit
+        - infrastructure
+      name: forward-to-cloudwatch
+      outputRefs:
+        - cloudwatch
