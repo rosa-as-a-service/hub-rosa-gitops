@@ -1,3 +1,4 @@
+---
 apiVersion: operator.open-cluster-management.io/v1
 kind: MultiClusterHub
 metadata:
@@ -6,3 +7,14 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "4"
 spec: {}
+---
+kind: MultiClusterObservability
+apiVersion: observability.open-cluster-management.io/v1beta2
+metadata:
+  name: observability
+spec:
+  observabilityAddonSpec: {}
+  storageConfig:
+    metricObjectStorage:
+      key: thanos.yaml
+      name: thanos-object-storage
