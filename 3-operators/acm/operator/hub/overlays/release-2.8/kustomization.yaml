@@ -12,3 +12,10 @@ patchesJson6902:
       - op: replace
         path: /spec/channel
         value: 'release-2.8'
+  - target:
+      kind: Subscription
+      name: klusterlet
+    patch: |-
+      - op: replace
+        path: /spec/channel
+        value: 'stable-2.3'
