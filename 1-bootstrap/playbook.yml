@@ -127,6 +127,25 @@
             secret-access-key: "{{ secret_access_key | b64encode }}"
           type: Opaque
 
+    - name: template observability secret
+      kubernetes.core.k8s:
+        resource_definition:
+          apiVersion: v1
+          kind: Secret
+          metadata:
+            name: thanos-object-storage
+            namespace: open-cluster-management-observability
+          type: Opaque
+          stringData:
+            thanos.yaml: |
+              type: s3
+              config:
+                bucket: YOUR_RH_DATA_FOUNDATION_BUCKET
+                endpoint: YOUR_RH_DATA_FOUNDATION_ENDPOINT 1
+                insecure: false
+                access_key: YOUR_RH_DATA_FOUNDATION_ACCESS_KEY
+                secret_key: YOUR_RH_DATA_FOUNDATION_SECRET_KEY
+
     # Possibly use ODF + Multicloud Object Gateway instead
     # # This namespace is later managed by Amazon Controller for Kubernetes - Amazon S3 Operator, but is required for the initial bootstrapping to complete
     # - name: configure ack-system project

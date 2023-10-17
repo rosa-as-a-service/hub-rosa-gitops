@@ -4,5 +4,5 @@ resources:
   - namespace.yml
   - operatorgroup.yml
   - subscription.yml
-  - storagecluster.yml
-  - storagesystem.yml
+  # - storagecluster.yml
+  # - storagesystem.yml
