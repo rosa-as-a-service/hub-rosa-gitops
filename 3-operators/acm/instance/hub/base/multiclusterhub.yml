@@ -8,18 +8,13 @@ metadata:
     argocd.argoproj.io/sync-wave: "4"
 spec: {}
 ---
-apiVersion: objectbucket.io/v1alpha1
-kind: ObjectBucketClaim
+apiVersion: s3.services.k8s.aws/v1alpha1
+kind: Bucket
 metadata:
-  name: thanos-storage
+  name: thanos-storage-claim
   namespace: open-cluster-management
-  annotations:
-    argocd.argoproj.io/sync-wave: "4"
 spec:
-  additionalConfig:
-    bucketclass: noobaa-default-bucket-class
-  bucketName: thanos-storage
-  storageClassName: openshift-storage.noobaa.io
+  name: thanos-storage
 ---
 kind: MultiClusterObservability
 apiVersion: observability.open-cluster-management.io/v1beta2
