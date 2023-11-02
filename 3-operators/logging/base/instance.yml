@@ -10,7 +10,7 @@ spec:
   outputs:
     - cloudwatch:
         groupBy: namespaceName
-        groupPrefix: rosa-pbz7x # template this for spokes
+        groupPrefix: rosa-hub # template this for spokes
         region: ap-southeast-2
       name: cloudwatch
       secret:
