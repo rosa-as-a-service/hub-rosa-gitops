@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: elasticsearch-operator
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  destination:
+    namespace: openshift-operators-redhat
+    server: 'https://kubernetes.default.svc'
+  project: default
+  source:
+    path: 3-operators/elasticsearch/overlays/stable-5.8
+    repoURL: >-
+      git@github.com:rosa-as-a-service/hub-rosa-gitops.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
