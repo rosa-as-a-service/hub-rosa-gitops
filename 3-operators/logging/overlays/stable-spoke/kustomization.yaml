@@ -10,4 +10,4 @@ patches:
     patch: |-
       - op: replace
         path: /items/spec/outputs/0/cloudwatch/groupPrefix
-        value: 'rosa-poke'
+        value: 'rosa-spoke'
