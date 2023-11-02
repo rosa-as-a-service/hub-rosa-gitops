@@ -1,0 +1,36 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: logging-operator
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  generators:
+    - clusterDecisionResource:
+        configMapRef: acm-placement
+        labelSelector:
+          matchLabels:
+            cluster.open-cluster-management.io/placement: spoke-cluster-placement
+        requeueAfterSeconds: 180
+  template:
+    metadata:
+      name: 'logging-operator-{{name}}'
+    spec:
+      destination:
+        namespace: openshift-gitops
+        server: '{{server}}'
+      project: default
+      source:
+        path: 3-operators/logging/overlays/stable-spoke
+        repoURL: >-
+          git@github.com:rosa-as-a-service/hub-rosa-gitops.git
+        targetRevision: main
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
+          - ApplyOutOfSyncOnly=true

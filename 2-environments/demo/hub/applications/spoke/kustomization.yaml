@@ -4,3 +4,5 @@ metadata:
   name: kustomization-file
 resources:
   - misc.yml
+  - logging.yml
+  - elasticsearch.yml
