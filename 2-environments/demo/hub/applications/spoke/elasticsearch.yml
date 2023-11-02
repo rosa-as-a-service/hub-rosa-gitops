@@ -19,7 +19,7 @@ spec:
       name: 'elasticsearch-operator-{{name}}'
     spec:
       destination:
-        namespace: openshift-gitops
+        namespace: elasticsearch
         server: '{{server}}'
       project: default
       source:
