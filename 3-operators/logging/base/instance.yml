@@ -4,6 +4,8 @@ kind: ClusterLogging
 metadata:
   name: instance
   namespace: openshift-logging
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   collection:
     type: vector
@@ -32,7 +34,7 @@ metadata:
   name: instance
   namespace: openshift-logging
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   outputs:
     - cloudwatch:
