@@ -8,7 +8,8 @@ resources:
   - applications/acm-operator.yml
   - applications/ack-s3-operator.yml
   - applications/logging-operator.yml
-  - applications/elasticsearch-operator.yml
+  - applications/loki-operator.yml
+  - applications/cert-manager-operator.yml
   - applications/misc.yml
   - applications/quay-operator.yml
   - applications/spoke

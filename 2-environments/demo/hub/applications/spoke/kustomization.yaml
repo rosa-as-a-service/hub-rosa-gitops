@@ -5,4 +5,4 @@ metadata:
 resources:
   - misc.yml
   - logging.yml
-  - elasticsearch.yml
+  - loki.yml

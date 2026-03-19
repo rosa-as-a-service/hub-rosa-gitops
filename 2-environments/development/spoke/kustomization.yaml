@@ -1,0 +1,6 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources: []
+# Add spoke operator Applications here as needed, e.g.:
+# - applications/logging-operator.yml
+# - applications/rhacs-operator.yml

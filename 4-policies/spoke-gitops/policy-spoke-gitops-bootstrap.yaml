@@ -1,0 +1,51 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: Policy
+metadata:
+  name: policy-spoke-gitops-bootstrap
+  annotations:
+    policy.open-cluster-management.io/standards: NIST SP 800-53
+    policy.open-cluster-management.io/categories: CM Configuration Management
+    policy.open-cluster-management.io/controls: CM-2 Baseline Configuration
+spec:
+  remediationAction: enforce
+  disabled: false
+  dependencies:
+    - apiVersion: policy.open-cluster-management.io/v1
+      kind: Policy
+      name: policy-spoke-gitops-operator
+      namespace: policies
+      compliance: Compliant
+  policy-templates:
+    - objectDefinition:
+        apiVersion: policy.open-cluster-management.io/v1
+        kind: ConfigurationPolicy
+        metadata:
+          name: spoke-gitops-bootstrap-application
+        spec:
+          remediationAction: enforce
+          severity: low
+          object-templates:
+            - complianceType: musthave
+              objectDefinition:
+                apiVersion: argoproj.io/v1alpha1
+                kind: Application
+                metadata:
+                  name: spoke-bootstrap
+                  namespace: openshift-gitops
+                spec:
+                  destination:
+                    namespace: openshift-operators
+                    server: 'https://kubernetes.default.svc'
+                  project: default
+                  source:
+                    path: 2-environments/production/spoke
+                    repoURL: >-
+                      git@github.com:rosa-as-a-service/hub-rosa-gitops.git
+                    targetRevision: main
+                  syncPolicy:
+                    automated:
+                      prune: false
+                      selfHeal: true
+                    syncOptions:
+                      - CreateNamespace=true
+                      - ApplyOutOfSyncOnly=true

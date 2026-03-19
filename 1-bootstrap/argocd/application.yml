@@ -10,7 +10,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: 2-environments/demo/hub
+    path: 2-environments/production/hub
     repoURL: >-
       git@github.com:rosa-as-a-service/hub-rosa-gitops.git
     targetRevision: main

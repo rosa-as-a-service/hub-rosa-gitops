@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - applications/acm-operator.yml
+  - applications/aap-operator.yml
+  - applications/ack-s3-operator.yml
+  - applications/spoke-gitops-policies.yml

@@ -1,55 +1,52 @@
 ---
-apiVersion: logging.openshift.io/v1
-kind: ClusterLogging
-metadata:
-  name: instance
-  namespace: openshift-logging
-  annotations:
-    argocd.argoproj.io/sync-wave: "3"
-spec:
-  collection:
-    type: vector
-  logStore:
-    elasticsearch:
-      resources:
-        requests:
-          memory: 2Gi
-      storage:
-        size: 200G
-      nodeCount: 3
-      redundancyPolicy: SingleRedundancy
-    retentionPolicy:
-      application:
-        maxAge: 7d
-    type: elasticsearch
-  visualization:
-    kibana:
-      replicas: 1
-    type: kibana
-  managementState: Managed
----
-apiVersion: logging.openshift.io/v1
+apiVersion: observability.openshift.io/v1
 kind: ClusterLogForwarder
 metadata:
   name: instance
   namespace: openshift-logging
   annotations:
     argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 spec:
+  serviceAccount:
+    name: cluster-logging
   outputs:
-    - cloudwatch:
-        groupBy: namespaceName
+    - name: default-lokistack
+      type: lokiStack
+      lokiStack:
+        target:
+          name: logging-loki
+          namespace: openshift-logging
+        authentication:
+          token:
+            from: serviceAccount
+    - name: cloudwatch
+      type: cloudwatch
+      cloudwatch:
         groupPrefix: rosa-hub
         region: ap-southeast-2
-      name: cloudwatch
-      secret:
-        name: aws-credentials
-      type: cloudwatch
+      tls:
+        insecureSkipVerify: false
+      authentication:
+        awsAccessKey:
+          keyId:
+            secretName: aws-credentials
+            key: aws_access_key_id
+          keySecret:
+            secretName: aws-credentials
+            key: aws_secret_access_key
   pipelines:
-    - inputRefs:
+    - name: all-to-lokistack
+      inputRefs:
         - application
         - audit
         - infrastructure
-      name: forward-to-cloudwatch
+      outputRefs:
+        - default-lokistack
+    - name: all-to-cloudwatch
+      inputRefs:
+        - application
+        - audit
+        - infrastructure
       outputRefs:
         - cloudwatch

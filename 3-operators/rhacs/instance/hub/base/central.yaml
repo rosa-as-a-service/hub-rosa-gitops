@@ -20,11 +20,17 @@ spec:
         claimName: stackrox-db
   egress:
     connectivityPolicy: Online
-  scanner:
-    analyzer:
+  scannerV4:
+    indexer:
       scaling:
         autoScaling: Enabled
         maxReplicas: 5
         minReplicas: 2
         replicas: 2
-    scannerComponent: Enabled
+    matcher:
+      scaling:
+        autoScaling: Enabled
+        maxReplicas: 5
+        minReplicas: 2
+        replicas: 2
+    scannerComponent: Default

@@ -12,7 +12,7 @@ spec:
     server: 'https://kubernetes.default.svc'
   project: default
   source:
-    path: 3-operators/logging/overlays/stable
+    path: 3-operators/logging/overlays/stable-6.4
     repoURL: >-
       git@github.com:rosa-as-a-service/hub-rosa-gitops.git
     targetRevision: main

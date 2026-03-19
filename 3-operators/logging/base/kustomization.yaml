@@ -3,7 +3,6 @@ kind: Kustomization
 commonAnnotations:
   argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 resources:
-  # - namespace.yml
   - operatorgroup.yml
   - subscription.yml
   - instance.yml

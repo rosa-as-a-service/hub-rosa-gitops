@@ -21,6 +21,6 @@ metadata:
   namespace: openshift-operators
 spec:
   installPlanApproval: Automatic
-  name: klusterlet-product
+  name: klusterlet
   source: redhat-operators
   sourceNamespace: openshift-marketplace

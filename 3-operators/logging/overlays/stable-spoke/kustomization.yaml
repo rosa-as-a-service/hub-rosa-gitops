@@ -9,5 +9,5 @@ patches:
       namespace: openshift-logging
     patch: |-
       - op: replace
-        path: /spec/outputs/0/cloudwatch/groupPrefix
+        path: /spec/outputs/1/cloudwatch/groupPrefix
         value: 'rosa-spoke'
