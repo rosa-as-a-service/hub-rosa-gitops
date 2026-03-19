@@ -5,9 +5,4 @@ resources:
   - namespace.yml
   - operatorgroup.yml
   - subscription.yml
-  - controller.yml
-  - controller_route.yml
-#  - hub.yml
-#  - hub_route.yml
-#  - eda.yml
-#  - eda_route.yml
+  - aap.yml
