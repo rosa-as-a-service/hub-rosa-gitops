@@ -16,7 +16,6 @@ spec:
   image_pull_policy: IfNotPresent
   controller:
     disabled: false
-    name: existing-controller-name
   eda:
     disabled: true
   hub:
