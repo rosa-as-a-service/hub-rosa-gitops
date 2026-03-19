@@ -14,7 +14,7 @@ spec:
   source:
     path: 3-operators/certmanager/overlays/stable-v1.18
     repoURL: >-
-      git@github.com:rosa-as-a-service/hub-rosa-gitops.git
+      https://github.com/rosa-as-a-service/hub-rosa-gitops.git
     targetRevision: main
   syncPolicy:
     automated:

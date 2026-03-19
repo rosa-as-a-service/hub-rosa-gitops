@@ -2,17 +2,15 @@
 kind: Secret
 apiVersion: v1
 metadata:
-  name: gitops-bootstrap-repo
+  name: rosa-as-a-service-gitops-repo
   namespace: openshift-gitops
   labels:
     argocd.argoproj.io/secret-type: repository
   annotations:
     managed-by: argocd.argoproj.io
 data:
-  name: Z2l0b3BzLWJvb3RzdHJhcA==
+  name: cm9zYS1hcy1hLXNlcnZpY2UtZ2l0b3BzCg==
   project: ZGVmYXVsdA==
-  sshPrivateKey: >-
-    LS0tLS1CRUdJTiBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0KYjNCbGJuTnphQzFyWlhrdGRqRUFBQUFBQkc1dmJtVUFBQUFFYm05dVpRQUFBQUFBQUFBQkFBQUFhQUFBQUJObFkyUnpZUwoxemFHRXlMVzVwYzNSd01qVTJBQUFBQ0c1cGMzUndNalUyQUFBQVFRUWdYeTVKclNyVnk5ckxzSEQxcU5jK0c1Qzc2amlJClJ3RkNLRjFEVFdiU1M5S3BsUmd1RHY5aDZxL3p6bS90emdobzR6bHBuRlJMNmI5aHlvQk8wTEx4QUFBQXVMandyVE80OEsKMHpBQUFBRTJWalpITmhMWE5vWVRJdGJtbHpkSEF5TlRZQUFBQUlibWx6ZEhBeU5UWUFBQUJCQkNCZkxrbXRLdFhMMnN1dwpjUFdvMXo0YmtMdnFPSWhIQVVJb1hVTk5adEpMMHFtVkdDNE8vMkhxci9QT2IrM09DR2pqT1dtY1ZFdnB2MkhLZ0U3UXN2CkVBQUFBaEFNTmtQZTNDcU8vdEhybXpCV0VsQkhKelY0aFZaU295TGUvUTNpUm16M1MrQUFBQUczSnZjMkZBWW1GemRHbHYKYmk1c2RHeDNNaTVwYm5SbGNtNWhiQUVDQXdRPQotLS0tLUVORCBPUEVOU1NIIFBSSVZBVEUgS0VZLS0tLS0=
   type: Z2l0
-  url: Z2l0QGdpdGh1Yi5jb206cm9zYS1hcy1hLXNlcnZpY2UvaHViLXJvc2EtZ2l0b3BzLmdpdA==
+  url: aHR0cHM6Ly9naXRodWIuY29tL3Jvc2EtYXMtYS1zZXJ2aWNlL2h1Yi1yb3NhLWdpdG9wcy5naXQK
 type: Opaque

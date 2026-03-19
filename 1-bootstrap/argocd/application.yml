@@ -12,7 +12,7 @@ spec:
   source:
     path: 2-environments/production/hub
     repoURL: >-
-      git@github.com:rosa-as-a-service/hub-rosa-gitops.git
+      https://github.com/rosa-as-a-service/hub-rosa-gitops.git
     targetRevision: main
   syncPolicy:
     automated:
