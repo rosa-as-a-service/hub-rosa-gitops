@@ -1,2 +1,7 @@
-generators:
-  - ./policyGenerator.yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - placement.yaml
+  - policy-spoke-gitops-operator.yaml
+  - policy-spoke-gitops-bootstrap.yaml
+  - policy-spoke-gitops-acm-integration.yaml
